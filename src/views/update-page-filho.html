@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/update.css">
+    <title>Artur Alvim | Filhos</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/filho"><img src="/images/arrow-back.svg" alt="Voltar"></a>
+        </div>
+        <div class="form">
+            <div class="head">
+                <h1>NOVOS DADOS DO FILHO</h1>
+            </div>
+            <form action="/filho/update-filho" method="post" class="finderForm">
+                <div class="inputData">
+                    <input class="inputOld" name="nome" placeholder="Insira o nome do usuário">
+                    <select name="dado" id="">
+                        <option value="nome">Nome</option>
+                        <option value="rg">RG</option>
+                        <option value="cpf">CPF</option>
+                        <option value="E
+                        escolaridade">Escolaridade</option>
+                        <option value="cnpjCtps">CNPJ/CTPS</option>
+                        <option value="pcd">PCD</option>
+                        <option value="renda">Renda</option>
+                        <option value="doencas">Doenças</option>
+                        <option value="modeloDeTrabalho">CNPJ/CTPS</option>
+                        <option value="idade">Idade</option>
+                        <option value="cel">Celular</option>
+                        <option value="nomeTitular">Titular</option>
+                    </select>
+                    <input class="inputValue" name="value" placeholder="Insira o novo dado">
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

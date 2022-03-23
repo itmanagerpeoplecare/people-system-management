@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/create.css">
+    <title>Artur Alvim | Conjuges</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/residente"><img src="/images/arrow-back.svg" alt="Voltar"></a>
+        </div>
+        <div class="dropdown-container">
+            <button class="dropdown-button">
+                <div class="head">
+                    <h1>INFORMAÇÕES DO RESIDENTES</h1>
+                </div>
+                <form action="/residente/create-residente" method="post" class="createForm">
+                    <input type="text" name="nome" placeholder="Nome Completo" class="inputField">
+
+                    <input type="text" name="cpf" placeholder="CPF" class="inputField">
+
+                    <input type="text" name="nis" placeholder="NIS" class="inputField">
+
+                    <input type="text" name="rg" placeholder="RG" class="inputField">
+
+                    <input type="text" class="inputField" name="idade" placeholder="Idade" id="">
+                    <select name="modeloDeTrabalho" class="inputField">
+                        <option value="CNPJ">Autonômo</option>
+                        <option value="CTPS">Carteira Assinada</option>
+                    </select>
+
+                    <input type="text" name="cnpjCtps" placeholder="CNPJ/CTPS" class="inputField">
+
+                    <input type="text" name="renda" placeholder="Renda" class="inputField">
+
+                    <input type="text" name="nomeTitular" class="inputField" placeholder="Titular" id="">
+                    <button class="btnEnviar" type="submit">Enviar</button>
+                </form>
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

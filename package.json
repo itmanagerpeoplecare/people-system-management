@@ -1,0 +1,22 @@
+{
+  "name": "peoplecare-sm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.11.0",
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "nunjucks": "^3.2.3",
+    "prisma": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

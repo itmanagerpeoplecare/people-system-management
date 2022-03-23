@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/create.css">
+    <title>Artur Alvim | Titulares</title>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/titular"><img src="/images/arrow-back.svg" alt="Voltar"></a>
+        </div>
+        <div class="dropdown-container">
+            <button class="dropdown-button">
+                <div class="head">
+                    <h1>INFORMAÇÕES DO TITULAR</h1>
+                </div>
+                <form action="/titular/create-titular" method="post" class="createForm">
+                    <input type="text" name="nome" placeholder="Nome Completo" class="inputField">
+
+                    <input type="text" name="email" placeholder="Email" id="email" class="inputField">
+
+                    <input type="text" name="cpf" placeholder="CPF" class="inputField">
+
+                    <input type="text" name="nis" placeholder="NIS" class="inputField">
+
+                    <input type="text" name="rg" placeholder="RG" class="inputField">
+
+                    <input type="text" name="endereco" placeholder="Endereço" class="inputField">
+
+                    <select name="modeloDeTrabalho" class="inputField">
+                        <option value="CNPJ">Autonômo</option>
+                        <option value="CTPS">Carteira Assinada</option>
+                    </select>
+
+                    <input type="text" name="cnpjCtps" placeholder="CNPJ/CTPS" class="inputField">
+
+                    <input type="text" name="renda" placeholder="Renda" class="inputField">
+
+                    <input type="text" name="rendaTotal" placeholder="Renda Familiar" class="inputField">
+
+                    <input type="number" name="idade" placeholder="Idade" class="inputField">
+
+                    <input type="text" name="situacao" placeholder="Situação" class="inputField">
+
+                    <input type="text" name="representante" placeholder="Representante" class="inputField">
+
+                    <select name="estadoCivil" class="inputField">
+                        <option value="Solteiro">Solteiro(a)</option>
+                        <option value="Casado">Casado(a)</option>
+                        <option value="Divorciado">Divorciado(a)</option>
+                        <option value="Viúvo">Viúvo(a)</option>
+                    </select>
+
+                    <input type="text" name="cell" placeholder="Celular" class="inputField">
+
+                    <input type="text" name="project" placeholder="Projeto" id="" class="inputField">
+
+                    <button class="btnEnviar" type="submit">Enviar</button>
+                </form>
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

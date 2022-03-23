@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/read.css">
+    <title>Informações | Artur Alvim</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/residente"><img src="/images/arrow-back.svg" alt="Voltar"></a>
+        </div>
+        <div class="form">
+            <form action="/residente/read-residente" method="post" class="finderForm">
+                <div class="inputData">
+                    <select name="dado" id="">
+                        <option value="nome">Nome</option>
+                        <option value="rg">RG</option>
+                        <option value="cpf">CPF</option>
+                        <option value="nomeTitular">Cônjuge</option>
+                    </select>
+                    <input name="value" placeholder="Insira a informação">
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
+            <div class="user">
+                <div class="field">
+                    <h1 class="campo">ID </h1>
+                    <label class="data">{{dados.id}}</label>
+                </div>
+
+                <div class="field">
+                    <h1 class="campo">Nome</h1>
+                    <label class="data">{{dados.nome}}</label>
+                </div>
+
+                <div class="field">
+                    <h1 class="campo">CPF</h1>
+                    <label class="data">{{dados.cpf}}</label>
+                </div>
+                <div class="field">
+                    <h1 class="campo">RG</h1>
+                    <label class="data">{{dados.rg}}</label>
+                </div>
+                <div class="field">
+                    <h1 class="campo">Idade</h1>
+                    <label for="" class="data">{{dados.idade}}</label>
+                </div>
+                <div class="field">
+                    <h1 class="campo">Modalidade</h1>
+                    <label for="" class="data">{{dados.modeloDeTrabalho}}</label>
+                </div>
+                <div class="field">
+                    <h1 class="campo">CNPJS/CTPS</h1>
+                    <label for="" class="data">{{dados.cnpjCtps}}</label>
+                </div>
+                <div class="field">
+                    <h1 class="campo">Titular</h1>
+                    <label for="" class="data">{{dados.nomeTitular}}</label>
+                </div>
+                <div class="field">
+                    <h1 class="campo">Renda</h1>
+                    <label for="" class="data">{{dados.renda}}</label>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

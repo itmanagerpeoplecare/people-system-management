@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/create.css">
+    <title>Artur Alvim | Filhos</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/filho"><img src="/images/arrow-back.svg" alt="Voltar"></a>
+        </div>
+        <div class="dropdown-container">
+            <button class="dropdown-button">
+                <div class="head">
+                    <h1>INFORMAÇÕES DO FILHO</h1>
+                </div>
+                <form action="/filho/create-filho" method="post" class="createForm">
+                    <input type="text" name="nome" placeholder="Nome Completo" class="inputField">
+
+                    <input type="text" name="rg" placeholder="RG" class="inputField" id="">
+    
+                    <input type="text" name="cpf" placeholder="CPF" class="inputField">
+    
+                    <input type="text" name="nis" placeholder="NIS" class="inputField">
+
+                    <select name="modeloDeTrabalho" class="inputField">
+                        <option value="cnpj">Autonômo</option>
+                        <option value="ctps">Carteira Assinada</option>
+                        <option value="Não exerce atividade remunerada">Não exerce atividade remunerada</option>
+                    </select>
+    
+                    <input type="text" name="cnpjCtps" placeholder="CNPJ/CTPS" class="inputField">
+    
+                    <input type="text" name="renda" placeholder="Renda" class="inputField">
+
+                    <input type="number" name="idade" placeholder="Idade" class="inputField">
+                    
+                    <input class="inputField" type="text" name="escolaridade" placeholder="Escolaridade">
+
+                    <input class="inputField" type="text" name="pcd" placeholder="PCD">
+
+                    <input class="inputField" type="text"
+                    name="doencas" placeholder="Doenças">
+
+                    <input type="text" name="cursando"  placeholder="Cursando" class="inputField" id="">
+
+                    <input class="inputField" type="text" placeholder="titular" name="nomeTitular">
+                    <button class="btnEnviar" type="submit">Enviar</button>
+                </form>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

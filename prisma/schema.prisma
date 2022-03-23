@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model conjuge {
+  id               Int     @unique(map: "Conjuge_id_key") @default(autoincrement())
+  nome             String  @unique(map: "Conjuge_nome_key")
+  cpf              BigInt  @unique(map: "Conjuge_cpf_key")
+  rg               BigInt  @unique(map: "Conjuge_rg_key")
+  nis              BigInt?
+  escolaridade     String
+  idade            Int
+  modeloDeTrabalho String
+  cnpjCtps         BigInt  @default(0)
+  renda            Int?
+  nomeTitular      String  @unique
+  titular          titular @relation(fields: [nomeTitular], references: [nome])
+}
+
+model filho {
+  id               Int     @unique(map: "Filho_id_key") @default(autoincrement())
+  nome             String  @unique(map: "Filho_nome_key")
+  cpf              BigInt  @unique(map: "Filho_cpf_key")
+  rg               BigInt  @unique(map: "Filho_rg_key")
+  escolaridade     String
+  cursando         String
+  pcd              String  @default("Não")
+  doencas          String
+  idade            Int
+  modeloDeTrabalho String
+  cnpjCtps         BigInt
+  nomeTitular      String  @unique
+  renda            Int?
+  titular          titular @relation(fields: [nomeTitular], references: [nome])
+}
+
+model project {
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  route   String    @unique
+  address String
+  titular titular[]
+}
+
+model residente {
+  id               Int     @unique @default(autoincrement())
+  nome             String  @unique
+  cpf              BigInt  @unique
+  rg               BigInt  @unique
+  idade            Int
+  modeloDeTrabalho String
+  renda            Int?
+  nomeTitular      String  @unique
+  cnpjCtps         BigInt  @default(0)
+  titular          titular @relation(fields: [nomeTitular], references: [nome])
+}
+
+model role {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  description String
+  create      Boolean
+  read        Boolean
+  update      Boolean
+  date        DateTime     @default(now())
+  delt        Boolean
+  user_roles  user_roles[]
+}
+
+model titular {
+  id               Int        @unique(map: "Titular_id_key") @default(autoincrement())
+  nome             String     @unique(map: "Titular_nome_key")
+  cpf              BigInt     @unique(map: "Titular_cpf_key")
+  rg               BigInt     @unique(map: "Titular_rg_key")
+  nis              BigInt     @default(0)
+  endereco         String
+  modeloDeTrabalho String
+  cnpjCtps         BigInt?
+  renda            Float?
+  idade            Int
+  situacao         String
+  cel              BigInt
+  email            String
+  representante    String     @default("Toni")
+  estadoCivil      String?
+  nameProject      String
+  project          project    @relation(fields: [nameProject], references: [name])
+  conjuge          conjuge?
+  filho            filho?
+  residente        residente?
+
+  @@index([nameProject], map: "titular_nameProject_fkey")
+}
+
+model user {
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
+  email      String       @unique
+  password   String       @unique
+  user_roles user_roles[]
+}
+
+model user_roles {
+  user_name String
+  role_name String
+  role      role   @relation(fields: [role_name], references: [name], onDelete: Cascade)
+  user      user   @relation(fields: [user_name], references: [name])
+
+  @@id([user_name, role_name])
+  @@index([role_name], map: "user_roles_role_name_fkey")
+}

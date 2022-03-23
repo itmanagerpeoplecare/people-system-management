@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+html,
+body{
+    height: 100vh;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-bar{
+    width: 90%;
+    height: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: initial;
+}
+
+.arrow-back{
+    width: 5%;
+    height: 100%;
+    margin-left: 1rem;
+}
+
+.crudOptions{
+    width: 80%;
+    height: 75%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.crudOptions > a{
+    width: 40%;
+    height: 30%;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font:1.5rem Poppins;
+    font-weight:700;
+    color:#dbb99c;
+    background: #083954;
+    border-radius: 5px;
+    transition: .4s;
+}
+
+.crudOptions > a:nth-child(1){
+    margin-top: 0.5rem;
+}
+
+.crudOptions > a:nth-child(n + 2){
+    margin-top: 1rem;
+}
+
+.crudOptions > a:nth-child(4){
+    margin-bottom: 0.5rem;
+}
+
+.crudOptions > a:hover{
+    background: #483D8B;
+    color: #FFFFFFFF;
+}
+
+.crudOptions > a > img{
+    width: 50%;
+    height: 40%;
+}
+
+@media (min-width: 800px) {
+    .crudOptions{
+        flex-wrap: wrap;
+    }
+
+    .crudOptions >a{
+        height: 25%;
+        flex:1 1 200px;
+    }
+
+    .crudOptions > a:nth-child(n + 1){
+        margin-bottom: 0.5rem;
+    }
+}

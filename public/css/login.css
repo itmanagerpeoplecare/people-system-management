@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+*{
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size:62.5%;
+}
+
+html,
+body{
+    height: 100vh;
+    color:#FFFFFF;
+    font-family: Poppins;
+}
+
+/*
+	Altura e largura
+	Alinhamento - Vertical e Horizontal
+	Centralização dos filhos
+	Espaçamento e preenchimento
+	Cores e fontes
+	Bordar
+*/
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+    width: 40%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form form{
+    width: 80%;
+    height:75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #a57d63;
+    border-radius:5px;
+    border-style: none;
+}
+
+.form form h1{
+    font-size: 1.5rem;
+    color:#FFFFFF;
+}
+
+.inputField{
+    width: 90%;
+    height: 3rem;
+    border: none;
+    border-radius: 5px;
+    border-bottom: 1px solid #000000;
+    color:#000000;
+    background: #FFFFFF;
+    outline:none;
+    margin-top: 0.9rem;
+    padding-left: 1rem;
+    font-family:Poppins;
+}
+
+.form form button{
+    width: 10%;
+    height: 5%;
+    align-items: center;
+    font:1.5rem Poppins;
+    font-weight: 700;
+    margin-top: 0.3rem;
+    background: #a57d63;
+    color:#FFFFFF;
+    border-style:none;
+    border-radius: 5px;
+    outline:none;
+    transition: .4s;
+    margin-top:1rem;
+}
+
+@media (min-width:320px ) and (max-width:700px){
+    .form{
+        width: 80%;
+    }
+}
