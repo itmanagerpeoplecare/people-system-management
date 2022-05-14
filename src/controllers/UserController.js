@@ -27,7 +27,7 @@ module.exports = {
         if (!user) {
             return res.render("create-page-usuario.html")
         } else {
-            //return res.send(dados)
+            //return res.send(user)
             return res.render("show-new-usuario.html", { user })
         }
     },
@@ -49,7 +49,6 @@ module.exports = {
             secure: true,
             httpOnly: true,
         })
-
         const role = existUser.user_roles[0].role_name
         if (cookie) {
             //return res.send(token)
@@ -116,6 +115,11 @@ module.exports = {
             const dados = await prisma.user.findFirst({
                 where: {
                     name: value
+                },
+                include:{
+                    user_roles:{
+                        select:{role_name:true}
+                    }
                 }
             })
 
@@ -127,6 +131,10 @@ module.exports = {
             const dados = await prisma.user.findFirst({
                 where: {
                     email: value
+                },include:{
+                    user_roles:{
+                        select:{role_name:true}
+                    }
                 }
             })
 
@@ -148,26 +156,26 @@ module.exports = {
         }
 
         if (dado == "nome") {
-            const dados = await prisma.user.update({
+            const user = await prisma.user.update({
                 where:{name}, data:{ nome: value}
             })
 
             BigInt.prototype.toJSON = function () {
                 return this.toString()
             }
-            return res.render("showEdit.html", {dados})
+            return res.render("show-new-usuario.html", {user})
         } else if (dado == "email"){
-            const dados = await prisma.email.update({
+            const user = await prisma.user.update({
                 where: {
                     name
                 },
-                data:{ email: email}
+                data:{ email: value}
             })
 
             BigInt.prototype.toJSON = function () {
                 return this.toString()
             }
-            return res.render("showEdit.html", {dados})
+            return res.render("show-new-usuario.html", {user})
         } else if (dado == "role"){
             const userAlredyAssigned = await prisma.user.findFirst({
                 where:{
@@ -175,10 +183,10 @@ module.exports = {
                 }, include: { user_roles: true }
             })
     
-            if(userAlredyAssigned.user_roles.role_name == value){
+            if(userAlredyAssigned.user_roles[0].role_name == value){
                 return res.send("User alredy has those permissions")
             } else {
-                const newUserAssigned = await prisma.user.update({
+                const user = await prisma.user.update({
                     where: {
                         name: name
                     },
@@ -191,7 +199,7 @@ module.exports = {
                     }
                 })
     
-                return res.send(newUserAssigned)
+                return res.render("show-new-usuario.html", {user})
             }
         }
     },
@@ -261,5 +269,22 @@ module.exports = {
         }
 
         return res.send(newuser)*/
+    },
+    async voltar(req, res){
+        const userName = req.userInfo.name
+        const existUser = await prisma.user.findFirst({ where: { name: userName }, include: { user_roles: true } })
+        if (!existUser) { return res.send("That occours an error") }
+
+        const email = existUser.email
+        if (!email) { return res.send("Your crendentials are wrong") }
+
+        const role = existUser.user_roles[0].role_name
+        if (role) {
+            //return res.send(token)
+            return res.render("index.html", {role})
+        } else {
+            //return res.send("erro")
+            return res.redirect('/')
+        }
     }
 }

@@ -39,14 +39,6 @@ model filho {
   titular          titular @relation(fields: [nomeTitular], references: [nome])
 }
 
-model project {
-  id      Int       @id @default(autoincrement())
-  name    String    @unique
-  route   String    @unique
-  address String
-  titular titular[]
-}
-
 model residente {
   id               Int     @unique @default(autoincrement())
   nome             String  @unique
@@ -88,13 +80,10 @@ model titular {
   email            String
   representante    String     @default("Toni")
   estadoCivil      String?
-  nameProject      String
-  project          project    @relation(fields: [nameProject], references: [name])
+  project          String
   conjuge          conjuge?
   filho            filho?
   residente        residente?
-
-  @@index([nameProject], map: "titular_nameProject_fkey")
 }
 
 model user {

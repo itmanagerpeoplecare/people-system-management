@@ -52,7 +52,7 @@ module.exports = {
         if (!dados) {
             return res.render("errorPage.html")
         } else {
-            return res.render("showNewResidente.html", { dados })
+            return res.render("show-new-residente.html", { dados })
         }
     },
     async read(req, res) {

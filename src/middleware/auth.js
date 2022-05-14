@@ -3,7 +3,6 @@ const dotenv = require('dotenv')
 
 const authenticated = (req, res, next) => {
 
-    //const jwt = req.headers.authorization
     const jwt = req.cookies["token"]
     jsonwebtoken.verify(jwt, process.env.ACCESS_SECRET_KEY, (err, userInfo) => {
         if (err) {

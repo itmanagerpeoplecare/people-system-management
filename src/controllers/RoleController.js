@@ -33,26 +33,138 @@ module.exports = {
         if(!role){
             return res.render("create-page-role.html")
         } else {
-            return res.render("show-new-role.html", role)
+            return res.render("show-new-role.html", {role})
         }
     },
     async read(req, res) {
-        const { name } = req.body
+        const { dado, value} = req.body
 
-        const role = await prisma.role.findFirst({ where: { name } })
-
-        return res.send(role)
+        if(dado == "name"){
+            const role = await prisma.role.findFirst({
+                where:{
+                    name:value
+                }
+            })
+            if(!role){
+                return res.render("read-page-perfil.html")
+            } else {
+                return res.render("read-page-perfil.html", {role})
+            }
+        } else if(dado == "description"){
+            const role = await prisma.role.findFirst({
+                where:{
+                    name:value
+                }
+            })
+            if(!role){
+                return res.render("read-page-perfil.html")
+            } else {
+                return res.render("read-page-perfil.html", {role})
+            }
+        }
     },
     async delete(req, res) {
         //Verificar role do usuário
-        const { roleName } = req.body
+        const { nome } = req.body
         const name = req.userInfo.name
 
         const user = await prisma.user.findFirst({ where: { name } })
 
         if (!user) { return res.send("Something was wrong") }
 
-        const deleteRole = await prisma.role.delete({ where: { name: roleName } })
-        return res.send(deleteRole)
+        const deleteRole = await prisma.role.delete({ where: { name: nome } })
+
+        BigInt.prototype.toJSON = function () {
+            return this.toString()
+        }
+
+        if(!deleteRole){
+            const resultado = deleteRole.name + " não foi deletado!"
+            return res.render("delete.html", {resultado})
+        } else {
+            const resultado = deleteRole.name + " foi deletado!"
+            return res.render("delete.html", { resultado })
+        }
+    },
+    async update(req, res){
+        const {dado, value, nome} = req.body
+        if (dado == "name") {
+            const role = await prisma.role.update({
+                where:{name:nome}, data:{ name: value}
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("show-role.html", {role})
+        } else if (dado == "description"){
+            const role = await prisma.role.update({
+                where:{name:nome}, data:{ description: value}
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("show-role.html", {role})
+        } else if (dado == "description"){
+            const role = await prisma.role.update({
+                where:{name:nome}, data:{ description: value}
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("show-role.html", {role})
+        } else if (dado == "create"){
+            const role = await prisma.role.update({
+                where:{name:nome}, data:{ create: value}
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("show-role.html", {role})
+        }
+        else if (dado == "create"){
+            const role = await prisma.role.update({
+                where:{name:nome}, data:{ create: value}
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("show-role.html", {role})
+        }
+        else if (dado == "read"){
+            const role = await prisma.role.update({
+                where:{name:nome}, data:{ read: value}
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("show-role.html", {role})
+        }
+        else if (dado == "update"){
+            const role = await prisma.role.update({
+                where:{name:nome}, data:{ update: value}
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("show-role.html", {role})
+        }
+        else if (dado == "delt"){
+            const role = await prisma.role.update({
+                where:{name:nome}, data:{ delt: value}
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("show-role.html", {role})
+        }
+
     }
 }

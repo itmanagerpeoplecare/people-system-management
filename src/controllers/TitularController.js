@@ -52,11 +52,7 @@ module.exports={
                 email,
                 representante,
                 estadoCivil,
-                project: {
-                    connect: {
-                        name: project
-                    }
-                }
+                project
             },
             create: {
                 nome,
@@ -73,11 +69,7 @@ module.exports={
                 email,
                 representante,
                 estadoCivil,
-                project: {
-                    connect: {
-                        name: project
-                    }
-                }
+                project
             }
         })
 

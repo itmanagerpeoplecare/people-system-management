@@ -2,6 +2,10 @@ const router = require("express").Router()
 const filho = require("../controllers/FilhoController")
 const auth = require("../middleware/auth")
 
+const {voltar} = require("../controllers/UserController")
+
+const index_page = "/residente/index"
+
 //Pages
 const create_page = "/filho/create-page"
 const read_page = "/filho/read-page"
@@ -12,7 +16,7 @@ const delt = "/filho/delete-filho"
 
 //Filhos
 router.get("/", (req, res) => {
-    return res.render("menu-acoes.html", { create_page, read_page, delete_page, update_page })
+    return res.render("menu-acoes.html", { create_page, read_page, delete_page, update_page, index_page})
 })
 
 router.get("/create-page", (req, res) => {
@@ -30,6 +34,8 @@ router.get("/delete-page", (req, res) => {
 router.get("/update-page", (req, res) => {
     return res.render("update-page-filho.html")
 })
+
+router.get("/index", auth, voltar)
 
 router.post("/create-filho", auth, filho.create)
 router.post("/read-filho", auth, filho.read)
