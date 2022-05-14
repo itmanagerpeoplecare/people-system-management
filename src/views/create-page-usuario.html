@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/create.css">
+    <title>Usuários</title>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/usuario"><img src="/images/arrow-back.svg" alt="Voltar"></a>
+        </div>
+        <div class="dropdown-container">
+            <button class="dropdown-button">
+                <div class="head">
+                    <h1>INFORMAÇÕES DO USUÁRIO</h1>
+                </div>
+                <form action="/usuario/create-usuario" method="post" class="createForm">
+                    <input type="text" name="name" placeholder="Nome Completo" class="inputField">
+
+                    <input type="text" name="email" placeholder="Email" id="email" class="inputField">
+
+                    <input type="password" name="password" class="inputField" placeholder="Senha">
+
+                    <button class="btnEnviar" type="submit">Enviar</button>
+                </form>
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

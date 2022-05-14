@@ -11,6 +11,11 @@ module.exports = {
             }
         })
 
+        const createValue = (create === 'true')
+        const readValue = (read === 'true')
+        const updateValue = (update === 'true')
+        const deltValue = (delt === 'true')
+
         if (existRole) {
             return res.send("this role alredy exists")
         }
@@ -18,15 +23,18 @@ module.exports = {
             data: {
                 name,
                 description,
-                create,
-                read,
-                update,
-                delt
+                create:createValue,
+                read:readValue,
+                update:updateValue,
+                delt:deltValue
             }
         })
 
-
-        return res.send(role)
+        if(!role){
+            return res.render("create-page-role.html")
+        } else {
+            return res.render("show-new-role.html", role)
+        }
     },
     async read(req, res) {
         const { name } = req.body

@@ -70,7 +70,7 @@ module.exports = {
                 return this.toString()
             }
 
-            return res.render("showNewFilho.html", {dados})
+            return res.render("show-new-filho.html", {dados})
         }
     },
     async read(req, res) {
@@ -94,6 +94,10 @@ module.exports = {
         if (existRole.read != true) {
             return res.send("You cant read users")
         } 
+
+        const cpfChecked = checkout.checkCPF(value)
+        const rgChecked = checkout.checkRG(value)
+        const nisChecked = checkout.checkNIS(value)
         if(dado == "todos"){
             const filho = await prisma.filho.findMany()
 
@@ -115,7 +119,7 @@ module.exports = {
         } else if (dado == "rg"){
             const dados = await prisma.filho.findFirst({
                 where: {
-                    rg:parseInt(value)
+                    rg:parseInt(rgChecked)
                 }
             })
 
@@ -126,7 +130,7 @@ module.exports = {
         } else if (dado == "cpf"){
             const dados = await prisma.filho.findFirst({
                 where: {
-                    cpf:parseInt(value)
+                    cpf:parseInt(cpfChecked)
                 }
             })
 
@@ -167,6 +171,10 @@ module.exports = {
         if (existRole.update != true) {
             return res.send("You cant update users")
         } 
+
+        const cpfChecked = checkout.checkCPF(value)
+        const rgChecked = checkout.checkRG(value)
+        const nisChecked = checkout.checkNIS(value)
         if(dado == "nome"){
            const dados = await prisma.filho.update({
                 where: {
@@ -188,7 +196,7 @@ module.exports = {
                     nome: nome
                 },
                 data: {
-                    cpf:parseInt(value)
+                    cpf:parseInt(cpfChecked)
                 }
             })
 
@@ -203,7 +211,7 @@ module.exports = {
                     nome
                 },
                 data: {
-                    cpf: parseInt(value)
+                    rg: parseInt(rgChecked)
                 }
             })
 

@@ -108,7 +108,10 @@ module.exports={
             return res.send("You cant read users")
         } 
         const { dado, value } = req.body
-
+        const cpfChecked = checkout.checkCPF(value)
+        const rgChecked = checkout.checkRG(value)
+        const nisChecked = checkout.checkNIS(value)
+        const cellChecked = checkout.checkCel(value)
         if (dado == "todos") {
             const titular = await prisma.titular.findMany()
 
@@ -135,67 +138,67 @@ module.exports={
         } else if (dado == "rg"){
             const dados = await prisma.titular.findFirst({
                 where: {
-                    rg:parseInt(value)
+                    rg:parseInt(rgChecked)
                 },
                 include: {
                     filho: { select: { nome: true } },
                     conjuge: { select: { nome: true } },
-                    residentes: { select: { nome: true } }
+                    residente: { select: { nome: true } }
                 }
             })
 
             BigInt.prototype.toJSON = function () {
                 return this.toString()
             }
-            return res.render("readTitulares.html", {dados})
+            return res.render("read-page-titular.html", {dados})
         } else if(dado == "nis"){
             const dados = await prisma.titular.findFirst({
                 where: {
-                    nis: parseInt(value)
+                    nis: parseInt(nisChecked)
                 },
                 include: {
                     filho: { select: { nome: true } },
                     conjuge: { select: { nome: true } },
-                    residentes: { select: { nome: true } }
+                    residente: { select: { nome: true } }
                 }
             })
 
             BigInt.prototype.toJSON = function () {
                 return this.toString()
             }
-            return res.render("readTitulares.html", {dados})
+            return res.render("read-page-titular.html", {dados})
         } else if(dado == "cnpjCtps"){
             const dados = await prisma.titular.findFirst({
                 where: {
-                    cnpjCtps: parseInt(value)
+                    cnpjCtps: parseInt()
                 },
                 include: {
                     filho: { select: { nome: true } },
                     conjuge: { select: { nome: true } },
-                    residentes: { select: { nome: true } }
+                    residente: { select: { nome: true } }
                 }
             })
 
             BigInt.prototype.toJSON = function () {
                 return this.toString()
             }
-            return res.render("readTitulares.html", {dados}) 
+            return res.render("read-page-titular.html", {dados}) 
         } else if (dado == "cpf"){
             const dados = await prisma.titular.findFirst({
                 where: {
-                    cpf: parseInt(value)
+                    cpf: parseInt(cpfChecked)
                 },
                 include: {
                     filho: { select: { nome: true } },
                     conjuge: { select: { nome: true } },
-                    residentes: { select: { nome: true } }
+                    residente: { select: { nome: true } }
                 }
             })
 
             BigInt.prototype.toJSON = function () {
                 return this.toString()
             }
-            return res.render("readTitulares.html", { dados })
+            return res.render("read-page-titular.html", { dados })
         }
     },
     async update(req,res){
@@ -213,7 +216,12 @@ module.exports={
         if (existRole.update != true) {
             return res.send("You cant update users")
         } 
+
         const { dado, value, nome } = req.body
+        
+        const cpfChecked = checkout.checkCPF(value)
+        const rgChecked = checkout.checkRG(value)
+        const nisChecked = checkout.checkNIS(value)
         if (dado == "nome") {
             const dados = await prisma.titular.update({
                 where:{nome}, data:{ nome: value}
@@ -228,7 +236,7 @@ module.exports={
                 where: {
                     nome
                 },
-                data:{ rg: parseInt(value)}
+                data:{ rg: parseInt(rgChecked)}
             })
 
             BigInt.prototype.toJSON = function () {
@@ -240,7 +248,7 @@ module.exports={
                 where: {
                     nome
                 },
-                data:{ nis: parseInt(value)}
+                data:{ nis: parseInt(nisChecked)}
             })
 
             BigInt.prototype.toJSON = function () {
@@ -266,7 +274,7 @@ module.exports={
                 where: {
                     nome
                 },
-                data:{cpf:parseInt(value)}
+                data:{cpf:parseInt(cpfChecked)}
             })
 
             BigInt.prototype.toJSON = function () {

@@ -62,7 +62,7 @@ module.exports = {
         if(!dados){
             return res.render("errorPage.html")
         } else {
-            return res.render("showNewConjuge.html", {dados})
+            return res.render("show-new-conjuge.html", {dados})
         }
     },
     async read(req, res){

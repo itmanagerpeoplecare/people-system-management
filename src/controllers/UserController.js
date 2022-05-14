@@ -24,7 +24,12 @@ module.exports = {
             }
         })
 
-        return res.send(user)
+        if (!user) {
+            return res.render("create-page-usuario.html")
+        } else {
+            //return res.send(dados)
+            return res.render("show-new-usuario.html", { user })
+        }
     },
     async login(req, res){
         const { email, password } = req.body
@@ -45,65 +50,149 @@ module.exports = {
             httpOnly: true,
         })
 
+        const role = existUser.user_roles[0].role_name
         if (cookie) {
             //return res.send(token)
-            return res.redirect('/home')
+            return res.render("index.html", {role})
         } else {
             //return res.send("erro")
             return res.redirect('/')
         }
     },
     async delete(req, res){
+        const userName = req.userInfo.name
         const {name} = req.body
-        const user = await prisma.user.delete({where:{name}})
-        return res.send(user)
-    },
-    async readAll(req, res){
-        const user = await prisma.user.findMany()
+        //const user = await prisma.user.delete({where:{name}})
 
-        delete user.iat
-        delete user.exp
-        delete user.password
-        
-        return res.send(user)
-    },
-    async assignRole(req, res){
-        const {userName, role} = req.body 
-        const name = req.userInfo.name
+        const existUser = await prisma.user.findFirst({ where: { name: userName }, include: { user_roles: true } })
+        if (!existUser) { return res.send("That occours an error") }
+        const role = existUser.user_roles[0].role_name
 
-        //return res.send(name)
-
-        const existUser = await prisma.user.findFirst({ where: { name }, include: { user_roles: true } })
-        if(!existUser){ return res.send("That occours an error") }
-        const roles = existUser.user_roles
-        
-        if(roles.create == false){
-            return res.send("You do not have permission to do that")
-        }
-
-        const userAlredyAssigned = await prisma.user.findFirst({
-            where:{
-                name:userName
-            }, include: { user_roles: true }
+        const existRole = await prisma.role.findFirst({
+            where: {
+                name: role
+            }
         })
 
-        if(userAlredyAssigned.user_roles.role_name == role){
-            return res.send("User alredy has those permissions")
+        if (existRole.delt != true) {
+            return res.send("You cant delete users")
+        } 
+        const usuario = await prisma.user.delete({
+            where:{
+                nome
+            }
+        })
+
+        BigInt.prototype.toJSON = function () {
+            return this.toString()
+        }
+
+        if(!usuario){
+            const resultado = usuario.nome + " não foi deletado!"
+            return res.render("delete.html", {resultado})
         } else {
-            const newUserAssigned = await prisma.user.update({
+            const resultado = usuario.nome + " foi deletado!"
+            return res.render("delete.html", { resultado })
+        }
+    },
+    async read(req, res){
+        const userName = req.userInfo.name
+        const existUser = await prisma.user.findFirst({ where: { name: userName }, include: { user_roles: true } })
+        if (!existUser) { return res.send("That occours an error") }
+        const role = existUser.user_roles[0].role_name
+
+        const existRole = await prisma.role.findFirst({
+            where: {
+                name: role
+            }
+        })
+
+        if (existRole.read != true) {
+            return res.send("You cant read users")
+        } 
+        const { dado, value } = req.body
+
+        if(dado == "name"){
+            const dados = await prisma.user.findFirst({
                 where: {
-                    name: userName
-                },
-                data: {
-                    user_roles: {
-                        create: {
-                            role_name: role
-                        }
-                    }
+                    name: value
                 }
             })
 
-            return res.send(newUserAssigned)
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("read-page-usuario.html", {dados})
+        } else if (dado == "email"){
+            const dados = await prisma.user.findFirst({
+                where: {
+                    email: value
+                }
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("read-page-usuario.html", {dados})
+        }
+    },
+    async update(req, res){
+        const {dado, value, name} = req.body
+        const userName = req.userInfo.name
+        const existUser = await prisma.user.findFirst({ where: { name: userName }, include: { user_roles: true } })
+        if (!existUser) { return res.send("That occours an error") }
+        const roles = existUser.user_roles[0].role_name
+        
+        if(roles.update == false){
+            return res.send("You do not have permission to do that")
+        }
+
+        if (dado == "nome") {
+            const dados = await prisma.user.update({
+                where:{name}, data:{ nome: value}
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("showEdit.html", {dados})
+        } else if (dado == "email"){
+            const dados = await prisma.email.update({
+                where: {
+                    name
+                },
+                data:{ email: email}
+            })
+
+            BigInt.prototype.toJSON = function () {
+                return this.toString()
+            }
+            return res.render("showEdit.html", {dados})
+        } else if (dado == "role"){
+            const userAlredyAssigned = await prisma.user.findFirst({
+                where:{
+                    name
+                }, include: { user_roles: true }
+            })
+    
+            if(userAlredyAssigned.user_roles.role_name == value){
+                return res.send("User alredy has those permissions")
+            } else {
+                const newUserAssigned = await prisma.user.update({
+                    where: {
+                        name: name
+                    },
+                    data: {
+                        user_roles: {
+                            create: {
+                                role_name: value
+                            }
+                        }
+                    }
+                })
+    
+                return res.send(newUserAssigned)
+            }
         }
     },
     async deniedRoleUser(req, res){

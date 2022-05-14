@@ -8,7 +8,8 @@ const read_page = "/conjuge/read-page"
 const update_page = "/conjuge/update-page"
 const delete_page = "/conjuge/delete-page"
 
-
+const back_page = "/conjuge/"
+const delt = "/conjuge/delete-conjuge"
 //Titulares
 router.get("/", (req, res) => {
     return res.render("menu-acoes.html", { create_page, read_page, delete_page, update_page })
@@ -23,7 +24,7 @@ router.get("/read-page", (req, res) => {
 })
 
 router.get("/delete-page", (req, res) => {
-    return res.render("delete.html", { delt })
+    return res.render("delete.html", { delt, back_page })
 })
 
 router.get("/update-page", (req, res) => {

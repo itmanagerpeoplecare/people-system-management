@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/update.css">
+    <title>Update</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/usuario"><img src="/images/arrow-back.svg" alt="Voltar"></a>
+        </div>
+        <div class="form">
+            <div class="head">
+                <h1>NOVOS DADOS DO USÚARIO</h1>
+            </div>
+            <form action="/usuario/update-usuario" method="post" class="finderForm">
+                <div class="inputData">
+                    <input class="inputOld" name="nome" placeholder="Insira o nome do usuário">
+                    <select name="dado" id="">
+                        <option value="nome">Nome</option>
+                        <option value="email">Email</option>
+                        <option value="role">Perfil</option>
+                    </select>
+                    <input class="inputValue" name="value" placeholder="Insira o novo dado">
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
